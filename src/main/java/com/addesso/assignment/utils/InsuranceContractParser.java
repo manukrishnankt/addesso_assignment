@@ -46,8 +46,9 @@ public class InsuranceContractParser {
             throw new NumberFormatException(
                     "Exception at file line no " + lineNo + " : Contains invalid Policy number details.");
         } catch (DateTimeParseException e) {
-            throw new NumberFormatException(
-                    "Exception at file line no " + lineNo + " : Contains invalid Start Date and End Date.");
+            throw new DateTimeParseException(
+                    "Exception at file line no " + lineNo + " : Contains invalid Start Date and End Date.",
+                    e.getParsedString(), e.getErrorIndex(), e);
         } finally {
             try {
                 if (reader != null) {
