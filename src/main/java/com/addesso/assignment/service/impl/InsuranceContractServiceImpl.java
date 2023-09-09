@@ -13,6 +13,16 @@ import com.addesso.assignment.repository.InsuranceContractRepository;
 import com.addesso.assignment.service.InsuranceContractService;
 import com.addesso.assignment.utils.InsuranceContractParser;
 
+/**
+ * Provide insurance file processing operations.
+ * Also includes persisting of data into database after processing and parsing of record.
+ * This is a concrete class of InsuranceContractService interface.
+ * 
+ * 
+ * @author Manu Krishnan K
+ * @version 1.0
+ * @since 2023-09-09
+ */
 @Service
 public class InsuranceContractServiceImpl implements InsuranceContractService {
 

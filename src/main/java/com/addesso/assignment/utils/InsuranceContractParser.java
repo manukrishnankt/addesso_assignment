@@ -12,6 +12,15 @@ import java.util.List;
 import com.addesso.assignment.exception.InvalidFileFormatException;
 import com.addesso.assignment.model.InsuranceContract;
 
+/**
+ * Provide Utility operations such as Parsing of file and producing the Iterable
+ * list of entity object InsuranceContract.
+ * 
+ * 
+ * @author Manu Krishnan K
+ * @version 1.0
+ * @since 2023-09-09
+ */
 public class InsuranceContractParser {
     private static DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
 

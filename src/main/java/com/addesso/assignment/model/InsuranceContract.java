@@ -9,6 +9,15 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
+/**
+ * The InsuranceContract represent a single contract
+ * It includes fields for the contract's id, policy holder name, policy number,
+ * start date, end date
+ * 
+ * @author Manu Krishnan K
+ * @version 1.0
+ * @since 2023-09-09
+ */
 @Entity
 @Table(name = "insurance_contract")
 public class InsuranceContract {
