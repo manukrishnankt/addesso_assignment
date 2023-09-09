@@ -9,23 +9,20 @@ import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.addesso.assignment.exception.InvalidFileFormatException;
 import com.addesso.assignment.model.InsuranceContract;
 
 public class InsuranceContractParser {
-    private static Logger logger = LoggerFactory.getLogger(InsuranceContractParser.class);
     private static DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
 
+    private InsuranceContractParser() {
+    }
+
     public static List<InsuranceContract> parseFileAndConvertToModel(String filePath)
-            throws Exception {
-        BufferedReader reader = null;
+            throws IOException, DateTimeParseException, NumberFormatException, InvalidFileFormatException {
         List<InsuranceContract> insuranceContracts = new ArrayList<>();
         int lineNo = 0;
-        try {
-            reader = new BufferedReader(new FileReader(filePath));
+        try (BufferedReader reader = new BufferedReader(new FileReader(filePath));) {
             String line = reader.readLine();
             while (line != null) {
                 lineNo++;
@@ -39,7 +36,6 @@ public class InsuranceContractParser {
                 line = reader.readLine();
             }
 
-            reader.close();
         } catch (IOException e) {
             throw new IOException(e);
         } catch (NumberFormatException e) {
@@ -49,17 +45,7 @@ public class InsuranceContractParser {
             throw new DateTimeParseException(
                     "Exception at file line no " + lineNo + " : Contains invalid Start Date and End Date.",
                     e.getParsedString(), e.getErrorIndex(), e);
-        } finally {
-            try {
-                if (reader != null) {
-                    reader.close();
-                }
-            } catch (Exception e) {
-                logger.info(e.getMessage());
-                throw new Exception(e);
-            }
         }
-
         return insuranceContracts;
     }
 

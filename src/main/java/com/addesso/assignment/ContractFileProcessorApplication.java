@@ -2,6 +2,8 @@ package com.addesso.assignment;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
@@ -12,40 +14,30 @@ import com.addesso.assignment.service.InsuranceContractService;
 
 @SpringBootApplication
 public class ContractFileProcessorApplication {
+    private static Logger logger = LoggerFactory.getLogger(ContractFileProcessorApplication.class);
 
 	public static void main(String[] args) {
 		ApplicationContext applicationContext = SpringApplication.run(ContractFileProcessorApplication.class, args);
-		if (args.length > 0) {
-			InsuranceContractService insuranceContractService = applicationContext
+		InsuranceContractService insuranceContractService = applicationContext
 					.getBean(InsuranceContractService.class);
+		if (args.length > 0) {
 			initFileProcess(insuranceContractService, args[0]);
-		}
+		} 
 	}
 
 	private static void initFileProcess(InsuranceContractService insuranceContractService, String filePath) {
 		try {
 			List<InsuranceContract> contracts = insuranceContractService.parseFile(filePath);
-			System.out
-					.println("==============================================================================\n\n");
-			System.out.println("File Processed Successfully. " + contracts.size() + " Record(s) saved to database.");
-			System.out
-					.println("\n\n==============================================================================");
+			String outPutMsg = "File Processed Successfully. " + contracts.size() + " Record(s) saved to database.";
+			logger.info(outPutMsg);
 		}catch (DataIntegrityViolationException e) {
-			System.out
-					.println("==============================================================================\n\n");
-			System.out.println("Operaton failed. Please check the LOG and verify the input file.");
-			System.err.println(e.getRootCause() +"\n\n");
+			logger.error("Operaton failed. Unique Constraint found duplicate entry. Please verify Policy Number.");
+			logger.error(e.getMessage());
 			e.printStackTrace();
-			System.out
-					.println("\n\n==============================================================================");
 		} catch (Exception e) {
-			System.out
-					.println("==============================================================================\n\n");
-			System.out.println("Operaton failed. Please check the LOG and verify the input file\n\n\n");
-			System.err.println(e.getMessage());
+			logger.error("Operaton failed. Please check the LOG and verify the input file\n\n\n");
+			logger.error(e.getMessage());
 			e.printStackTrace();
-			System.out
-					.println("\n\n==============================================================================");
 		}
 	}
 

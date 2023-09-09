@@ -5,7 +5,6 @@ import org.springframework.stereotype.Repository;
 
 import com.addesso.assignment.model.InsuranceContract;
 
-@Repository
 public interface InsuranceContractRepository extends JpaRepository<InsuranceContract, Integer> {
     
 }
