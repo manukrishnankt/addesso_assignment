@@ -1,10 +1,13 @@
 package com.addesso.assignment.service.impl;
 
+import java.io.IOException;
+import java.time.format.DateTimeParseException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.addesso.assignment.exception.InvalidFileFormatException;
 import com.addesso.assignment.model.InsuranceContract;
 import com.addesso.assignment.repository.InsuranceContractRepository;
 import com.addesso.assignment.service.InsuranceContractService;
@@ -17,7 +20,7 @@ public class InsuranceContractServiceImpl implements InsuranceContractService {
     private InsuranceContractRepository insuranceContractRepository;
 
     @Override
-    public List<InsuranceContract> parseFile(String filePath) throws Exception {
+    public List<InsuranceContract> parseFile(String filePath) throws IOException, DateTimeParseException, NumberFormatException, InvalidFileFormatException {
         List<InsuranceContract> constractList = InsuranceContractParser.parseFileAndConvertToModel(filePath);
         return this.insuranceContractRepository.saveAll(constractList);
 
