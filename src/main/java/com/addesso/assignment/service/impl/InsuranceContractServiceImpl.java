@@ -20,7 +20,6 @@ public class InsuranceContractServiceImpl implements InsuranceContractService{
     public void parseFile(String filePath) throws Exception {
         List<InsuranceContract> constractList = InsuranceContractParser.parseFileAndConvertToModel(filePath);
         this.insuranceContractRepository.saveAll(constractList);
-        System.out.println("File Processed Successfully. All Records saved to Database.");
         
     }
     

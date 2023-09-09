@@ -29,14 +29,13 @@ public class InsuranceContractParser {
             String line = reader.readLine();
             while (line != null) {
                 lineNo++;
-                System.out.println(line);
-                line = reader.readLine();
                 String[] contractDetailsArr = line.split(",");
                 if (contractDetailsArr.length != 4) {
                     throw new InvalidFileFormatException("Exception at file line no " + lineNo + " : contains invalid record details.");
                 }
                 InsuranceContract contractRecord = convertRecordToModel(contractDetailsArr);
                 insuranceContracts.add(contractRecord);
+                line = reader.readLine();
             }
 
             reader.close();

@@ -20,7 +20,7 @@ public class InsuranceContract {
     @Column(name = "policy_holder_name")
     private String policyHolderName;
 
-    @Column(name = "policy_number")
+    @Column(name = "policy_number", unique = true, length = 50)
     private int policyNumber;
 
     @Column(name = "start_date")
