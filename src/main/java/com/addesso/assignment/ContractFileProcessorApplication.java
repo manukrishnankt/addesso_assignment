@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
+import org.springframework.dao.DataIntegrityViolationException;
 
 import com.addesso.assignment.model.InsuranceContract;
 import com.addesso.assignment.service.InsuranceContractService;
@@ -27,6 +28,14 @@ public class ContractFileProcessorApplication {
 			System.out
 					.println("==============================================================================\n\n");
 			System.out.println("File Processed Successfully. " + contracts.size() + " Record(s) saved to database.");
+			System.out
+					.println("\n\n==============================================================================");
+		}catch (DataIntegrityViolationException e) {
+			System.out
+					.println("==============================================================================\n\n");
+			System.out.println("Operaton failed. Please check the LOG and verify the input file.");
+			System.err.println(e.getRootCause() +"\n\n");
+			e.printStackTrace();
 			System.out
 					.println("\n\n==============================================================================");
 		} catch (Exception e) {
