@@ -11,16 +11,16 @@ import com.addesso.assignment.service.InsuranceContractService;
 import com.addesso.assignment.utils.InsuranceContractParser;
 
 @Service
-public class InsuranceContractServiceImpl implements InsuranceContractService{
+public class InsuranceContractServiceImpl implements InsuranceContractService {
 
     @Autowired
     private InsuranceContractRepository insuranceContractRepository;
 
     @Override
-    public void parseFile(String filePath) throws Exception {
+    public List<InsuranceContract> parseFile(String filePath) throws Exception {
         List<InsuranceContract> constractList = InsuranceContractParser.parseFileAndConvertToModel(filePath);
-        this.insuranceContractRepository.saveAll(constractList);
-        
+        return this.insuranceContractRepository.saveAll(constractList);
+
     }
-    
+
 }

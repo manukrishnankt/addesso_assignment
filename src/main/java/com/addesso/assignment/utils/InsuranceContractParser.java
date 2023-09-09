@@ -31,7 +31,8 @@ public class InsuranceContractParser {
                 lineNo++;
                 String[] contractDetailsArr = line.split(",");
                 if (contractDetailsArr.length != 4) {
-                    throw new InvalidFileFormatException("Exception at file line no " + lineNo + " : contains invalid record details.");
+                    throw new InvalidFileFormatException(
+                            "Exception at file line no " + lineNo + " : Missing record details.");
                 }
                 InsuranceContract contractRecord = convertRecordToModel(contractDetailsArr);
                 insuranceContracts.add(contractRecord);
@@ -42,9 +43,11 @@ public class InsuranceContractParser {
         } catch (IOException e) {
             throw new IOException(e);
         } catch (NumberFormatException e) {
-            throw new NumberFormatException("Exception at file line no " + lineNo + " : contains invalid Policy number details.");
-        }  catch (DateTimeParseException e) {
-            throw new NumberFormatException("Exception at file line no " + lineNo + " : contains invalid Start Date and End Date.");
+            throw new NumberFormatException(
+                    "Exception at file line no " + lineNo + " : Contains invalid Policy number details.");
+        } catch (DateTimeParseException e) {
+            throw new NumberFormatException(
+                    "Exception at file line no " + lineNo + " : Contains invalid Start Date and End Date.");
         } finally {
             try {
                 if (reader != null) {
