@@ -17,6 +17,11 @@ import com.addesso.assignment.model.InsuranceContract;
  * @since 2023-09-09
  */
 public interface InsuranceContractService {
+   /**
+	 * Logic including parsing and persisting to database.
+	 * 
+	 * @param filePath is a string object holding the path of input file
+	 **/
    List<InsuranceContract> parseFile(String filePath)
          throws IOException, DateTimeParseException, NumberFormatException, InvalidFileFormatException;
 }

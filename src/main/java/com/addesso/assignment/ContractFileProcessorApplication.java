@@ -12,30 +12,46 @@ import org.springframework.dao.DataIntegrityViolationException;
 import com.addesso.assignment.model.InsuranceContract;
 import com.addesso.assignment.service.InsuranceContractService;
 
+/**
+ * Provide an entry point for the springboot application
+ * 
+ * 
+ * @author Manu Krishnan K
+ * @version 1.0
+ * @since 2023-09-09
+ */
 @SpringBootApplication
 public class ContractFileProcessorApplication {
-    private static Logger logger = LoggerFactory.getLogger(ContractFileProcessorApplication.class);
+	private static Logger logger = LoggerFactory.getLogger(ContractFileProcessorApplication.class);
 
 	public static void main(String[] args) {
 		ApplicationContext applicationContext = SpringApplication.run(ContractFileProcessorApplication.class, args);
 		InsuranceContractService insuranceContractService = applicationContext
-					.getBean(InsuranceContractService.class);
+				.getBean(InsuranceContractService.class);
 		if (args.length > 0) {
 			initFileProcess(insuranceContractService, args[0]);
-		} 
+		}
 	}
 
+	/**
+	 * File Processing logic starts from here.
+	 * Include Parsing and Persisting to database.
+	 * 
+	 * @param insuranceContractService object have the business logic to invoke
+	 *                                 parsing and persisting.
+	 * @param filePath is a string object holding the path of input file
+	 **/
 	private static void initFileProcess(InsuranceContractService insuranceContractService, String filePath) {
 		try {
 			List<InsuranceContract> contracts = insuranceContractService.parseFile(filePath);
-			String outPutMsg = "File Processed Successfully. " + contracts.size() + " Record(s) saved to database.";
+			String outPutMsg = "\n\n\nFile Processed Successfully. " + contracts.size() + " Record(s) saved to database.";
 			logger.info(outPutMsg);
-		}catch (DataIntegrityViolationException e) {
-			logger.error("Operaton failed. Unique Constraint found duplicate entry. Please verify Policy Number.");
+		} catch (DataIntegrityViolationException e) {
+			logger.error("\n\n\nOperaton failed. Unique Constraint found duplicate entry. Please verify Policy Number.");
 			logger.error(e.getMessage());
 			e.printStackTrace();
 		} catch (Exception e) {
-			logger.error("Operaton failed. Please check the LOG and verify the input file\n\n\n");
+			logger.error("\n\n\nOperaton failed. Please check the LOG and verify the input file");
 			logger.error(e.getMessage());
 			e.printStackTrace();
 		}
