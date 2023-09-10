@@ -4,9 +4,9 @@ System Requirements
   2. maven
   3. postgresql
 
-Before running the code database configurations needs to be updated
+Before running the code, database configurations need to be updated
   1. Set Username, Password, and URL for database connection
-  2. create a new database with name "addesso_insurance_app" in the postgresql
+  2. Create a new database with the name "addesso_insurance_app" in the Postgresql
 
 
 To Run the code
@@ -15,4 +15,4 @@ To Run the code
   3. Run "java -jar .\target\assignment-0.0.1-SNAPSHOT.jar sample.txt"
 
 sample.txt is a sample text file provided for testing and development. 
-Alternative file can be processed by mentioning the filepath in the command
+The alternative file can be processed by mentioning the file path in the command
