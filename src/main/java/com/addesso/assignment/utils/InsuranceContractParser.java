@@ -24,9 +24,22 @@ import com.addesso.assignment.model.InsuranceContract;
 public class InsuranceContractParser {
     private static DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
 
+    /**
+     * Private No Arg constructor to restrict user from creating an instance.
+     * 
+     **/
     private InsuranceContractParser() {
     }
 
+    /**
+     * File Processing logic.
+     * Include Parsing from each line from text file.
+     * 
+     * @param filePath is a string object holding the path of input file
+     * 
+     * @throws IOException,DateTimeParseException,NumberFormatException,InvalidFileFormatException Exceptions
+     * @return List<InsuranceContract> object
+     **/
     public static List<InsuranceContract> parseFileAndConvertToModel(String filePath)
             throws IOException, DateTimeParseException, NumberFormatException, InvalidFileFormatException {
         List<InsuranceContract> insuranceContracts = new ArrayList<>();
@@ -58,13 +71,22 @@ public class InsuranceContractParser {
         return insuranceContracts;
     }
 
+    /**
+     * File Processing logic.
+     * Include Parsing from each line from text file.
+     * 
+     * @param contractDetailsArr is a string array object holding the single
+     *                           contract detail.
+     * 
+     * @return InsuranceContract
+     **/
     private static InsuranceContract convertRecordToModel(String[] contractDetailsArr) {
 
         InsuranceContract insContract = new InsuranceContract();
-        insContract.setPolicyHolderName(contractDetailsArr[0]);
-        insContract.setPolicyNumber(Integer.parseInt(contractDetailsArr[1]));
-        insContract.setStartDate(LocalDate.parse(contractDetailsArr[2], dateFormatter));
-        insContract.setEndDate(LocalDate.parse(contractDetailsArr[3], dateFormatter));
+        insContract.setPolicyHolderName(contractDetailsArr[0].trim());
+        insContract.setPolicyNumber(Integer.parseInt(contractDetailsArr[1].trim()));
+        insContract.setStartDate(LocalDate.parse(contractDetailsArr[2].trim(), dateFormatter));
+        insContract.setEndDate(LocalDate.parse(contractDetailsArr[3].trim(), dateFormatter));
         return insContract;
     }
 }
