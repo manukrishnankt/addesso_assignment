@@ -26,28 +26,30 @@ public class ContractFileProcessorApplication {
 
 	public static void main(String[] args) {
 		ApplicationContext applicationContext = SpringApplication.run(ContractFileProcessorApplication.class, args);
-		InsuranceContractService insuranceContractService = applicationContext
-				.getBean(InsuranceContractService.class);
+		InsuranceContractService insuranceContractService = applicationContext.getBean(InsuranceContractService.class);
 		if (args.length > 0) {
 			initFileProcess(insuranceContractService, args[0]);
 		}
 	}
 
 	/**
-	 * File Processing logic starts from here.
-	 * Include Parsing and Persisting to database.
+	 * File Processing logic starts from here. Include Parsing and Persisting to
+	 * database.
 	 * 
 	 * @param insuranceContractService object have the business logic to invoke
 	 *                                 parsing and persisting.
-	 * @param filePath is a string object holding the path of input file
+	 * @param filePath                 is a string object holding the path of input
+	 *                                 file
 	 **/
 	private static void initFileProcess(InsuranceContractService insuranceContractService, String filePath) {
 		try {
 			List<InsuranceContract> contracts = insuranceContractService.parseFile(filePath);
-			String outPutMsg = "\n\n\nFile Processed Successfully. " + contracts.size() + " Record(s) saved to database.";
+			String outPutMsg = "\n\n\nFile Processed Successfully. " + contracts.size()
+					+ " Record(s) saved to database.";
 			logger.info(outPutMsg);
 		} catch (DataIntegrityViolationException e) {
-			logger.error("\n\n\nOperaton failed. Unique Constraint found duplicate entry. Please verify Policy Number.");
+			logger.error(
+					"\n\n\nOperaton failed. Unique Constraint found duplicate entry. Please verify Policy Number.");
 			logger.error(e.getMessage());
 			e.printStackTrace();
 		} catch (Exception e) {

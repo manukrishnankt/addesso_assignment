@@ -8,8 +8,13 @@ package com.addesso.assignment.exception;
  * @version 1.0
  * @since 2023-09-09
  */
-public class InvalidFileFormatException  extends Exception {
-    public InvalidFileFormatException(String message) {
-        super(message);
-    }
+public class InvalidFileFormatException extends Exception {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2237116503136122427L;
+
+	public InvalidFileFormatException(String message) {
+		super(message);
+	}
 }
