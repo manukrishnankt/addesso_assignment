@@ -14,16 +14,10 @@ import com.addesso.assignment.service.InsuranceContractService;
 import com.addesso.assignment.utils.InsuranceContractParser;
 
 /**
-<<<<<<< HEAD
  * Provide insurance file processing operations.
  * Also includes persisting of data into database after processing and parsing
  * of record.
  * This is a concrete class of InsuranceContractService interface.
-=======
- * Provide insurance file processing operations. Also includes persisting of
- * data into database after processing and parsing of record. This is a concrete
- * class of InsuranceContractService interface.
->>>>>>> 9d5469372b9f215567fcd82ce0db80b93b0c6824
  * 
  * 
  * @author Manu Krishnan K
@@ -36,19 +30,11 @@ public class InsuranceContractServiceImpl implements InsuranceContractService {
 	@Autowired
 	private InsuranceContractRepository insuranceContractRepository;
 
-<<<<<<< HEAD
     @Override
     public List<InsuranceContract> parseFile(String filePath)
             throws IOException, DateTimeParseException, NumberFormatException, InvalidFileFormatException {
         List<InsuranceContract> constractList = InsuranceContractParser.parseFileAndConvertToModel(filePath);
         return this.insuranceContractRepository.saveAll(constractList);
-=======
-	@Override
-	public List<InsuranceContract> parseFile(String filePath)
-			throws IOException, DateTimeParseException, NumberFormatException, InvalidFileFormatException {
-		List<InsuranceContract> constractList = InsuranceContractParser.parseFileAndConvertToModel(filePath);
-		return this.insuranceContractRepository.saveAll(constractList);
->>>>>>> 9d5469372b9f215567fcd82ce0db80b93b0c6824
 
 	}
 
