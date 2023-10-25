@@ -1,7 +1,11 @@
 package com.addesso.assignment.repository;
 
-import org.springframework.data.jpa.repository.JpaRepository;
+import java.util.List;
 
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+
+import com.addesso.assignment.dtos.InsuranceContractVo;
 import com.addesso.assignment.model.InsuranceContract;
 
 /**
@@ -15,4 +19,6 @@ import com.addesso.assignment.model.InsuranceContract;
  */
 public interface InsuranceContractRepository extends JpaRepository<InsuranceContract, Integer> {
 
+    @Query(value = "SELECT new com.addesso.assignment.dtos.InsuranceContractVo(c.id, c.policyHolderName) FROM InsuranceContract AS c")
+    List<InsuranceContractVo> getInsuranceRecords();
 }

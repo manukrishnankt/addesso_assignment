@@ -30,6 +30,8 @@ public class ContractFileProcessorApplication {
 				.getBean(InsuranceContractService.class);
 		if (args.length > 0) {
 			initFileProcess(insuranceContractService, args[0]);
+		} else {
+			getProcessSize(insuranceContractService);
 		}
 	}
 
@@ -39,15 +41,18 @@ public class ContractFileProcessorApplication {
 	 * 
 	 * @param insuranceContractService object have the business logic to invoke
 	 *                                 parsing and persisting.
-	 * @param filePath is a string object holding the path of input file
+	 * @param filePath                 is a string object holding the path of input
+	 *                                 file
 	 **/
 	private static void initFileProcess(InsuranceContractService insuranceContractService, String filePath) {
 		try {
 			List<InsuranceContract> contracts = insuranceContractService.parseFile(filePath);
-			String outPutMsg = "\n\n\nFile Processed Successfully. " + contracts.size() + " Record(s) saved to database.";
+			String outPutMsg = "\n\n\nFile Processed Successfully. " + contracts.size()
+					+ " Record(s) saved to database.";
 			logger.info(outPutMsg);
 		} catch (DataIntegrityViolationException e) {
-			logger.error("\n\n\nOperaton failed. Unique Constraint found duplicate entry. Please verify Policy Number.");
+			logger.error(
+					"\n\n\nOperaton failed. Unique Constraint found duplicate entry. Please verify Policy Number.");
 			logger.error(e.getMessage());
 			e.printStackTrace();
 		} catch (Exception e) {
@@ -57,4 +62,12 @@ public class ContractFileProcessorApplication {
 		}
 	}
 
+	/**
+		 * 
+		 **/
+	private static void getProcessSize(InsuranceContractService insuranceContractService) {
+		System.out.println("=========================================");
+		System.out.println(insuranceContractService.getRecordLength());
+		System.out.println("=========================================");
+	}
 }

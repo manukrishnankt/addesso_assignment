@@ -9,7 +9,8 @@ import com.addesso.assignment.model.InsuranceContract;
 
 /**
  * Provide insurance file processing operations.
- * Also includes persisting of data into database after processing and parsing of record.
+ * Also includes persisting of data into database after processing and parsing
+ * of record.
  * 
  * 
  * @author Manu Krishnan K
@@ -17,11 +18,13 @@ import com.addesso.assignment.model.InsuranceContract;
  * @since 2023-09-09
  */
 public interface InsuranceContractService {
-   /**
+	/**
 	 * Logic including parsing and persisting to database.
 	 * 
 	 * @param filePath is a string object holding the path of input file
 	 **/
-   List<InsuranceContract> parseFile(String filePath)
-         throws IOException, DateTimeParseException, NumberFormatException, InvalidFileFormatException;
+	List<InsuranceContract> parseFile(String filePath)
+			throws IOException, DateTimeParseException, NumberFormatException, InvalidFileFormatException;
+
+	int getRecordLength();
 }
